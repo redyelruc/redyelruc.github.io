@@ -62,6 +62,7 @@ button:hover{
     border-radius: 4px;
     display:flex;
     flex-direction: column;
+    align-content: flex-end;
 }
 
 #sketchpad{
@@ -88,8 +89,21 @@ button:hover{
 
 .bottom-controls{
     padding:1px;
-
 }
+
+#git{
+    width: 20%;
+    position: absolute; 
+    right: 0; 
+    bottom: 0;
+}
+
+#git-holder{ 
+    position: relative; 
+    height: 24px; 
+}
+
+
 
 .grid-item:hover{
     background-color: red;
@@ -98,4 +112,3 @@ button:hover{
 input[type=number]{
     width: 30px;
 } 
-
