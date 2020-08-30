@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = 'en-GB'>
+    <head>
+        <title>Etch-a-Sketch</title>
+        <link rel="stylesheet" href="etchasketch.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    </head>
+    <body>
+        <center>
+        <div id="title">
+        </div>
+        </center>
+
+        <div id="control-panel">
+            <div id="left-panel">
+                <div id="controls-1">
+                    Controls
+                </div>
+                <div id="top-controls">
+                    <div id="controls-2" class="top-controls">
+                    Grid size:<input type="number" id="gridsize" min="16" max="60" 
+                                                        onkeyup=enforceMinMax(this)>
+                    </div>
+                    <div id="controls-3" class="top-controls">
+                    Show grid:<input type="checkbox" id="gridline-visibility" checked onchange=toggleGridlines(this)>
+                    </div>
+                    <div id="controls-4" class="top-controls">
+                        Colour:<input type="color" id="color" value="#00ff00">
+                    </div>
+                </div>
+                <div id="bottom controls">
+                    <div id="controls-5" class="bottom-controls">
+                        <button id="erase-toggle" type ="submit" onclick=toggleEraseMode()>Erase</button>
+                    </div>
+                    <div id="controls-6" class="bottom-controls">
+                        <button id="capture" type ="submit" onclick=captureSketchpad()>Capture</button>
+                    </div>
+                    <div id="controls-7" class="bottom-controls">
+                        <button id="restart" type ="submit" onclick=startup()>Restart</button>
+                    </div>
+                </div>
+                <div id="logo" >
+                    <img style="height: auto; width: 100%;" src="https://cdn.shopify.com/s/files/1/0271/2623/5239/t/4/assets/etch-logo_x300.png?v=17751932899631430741">
+                </div>
+            </div>
+            <div id="sketchpad" class="">
+            
+            </div>
+            <div id="right-panel">
+
+            </div>
+        </div>
+    </body>
+    <script src="etchasketch.js"></script> 
+</html>
+
