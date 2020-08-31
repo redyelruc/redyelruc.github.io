@@ -1,4 +1,3 @@
-// global variables 
 let paintable = false; //mousedown=true mouseup=false: when paintable, cells change color on mouseover.
 let eraseMode = false; // controls whether color is white or fillColor
 let defaultColor = "#009900";
@@ -44,6 +43,9 @@ function makeGrid(size) {
         cell.addEventListener("mousedown", () => { paintable = true });
         cell.addEventListener("mouseup", () => { paintable = false });
         cell.addEventListener("mouseover", () => { if (paintable) { paintCell(cell) } });
+        cell.addEventListener("mousedown", function(event){
+            event.preventDefault()
+          });
         sketchpad.appendChild(cell).className = "grid-item";
     };
 }
@@ -80,15 +82,14 @@ function paintCell(cell) {
 
 // ensure number entered does not exceed min and max allowed
 // if it does, change to either min or max
-function enforceMinMax(el) {
-    if (el.value != "") {
-        if (parseInt(el.value) < parseInt(el.min)) {
-            el.value = el.min;
-            el.click();
+function enforceMinMax(element) {
+    if (element.value != "") {
+        if (parseInt(element.value) < parseInt(element.min)) {
+            element.value = element.min;
         }
-        if (parseInt(el.value) > parseInt(el.max)) {
-            el.value = el.max;
-            el.click();
+        if (parseInt(element.value) > parseInt(element.max)) {
+            element.value = element.max;
+            element.click();
         }
     }
 }
