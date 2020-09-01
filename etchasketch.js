@@ -38,6 +38,7 @@ function initialiseGridSizeControl(){
 function initialiseColorToggle(){
     let colorToggle = document.querySelector("#color-tog");
     colorToggle.checked = "checked";
+    fillStyle = 'color';
 }
 // set up the colorWell and set to default color
 function initialiseColorWell(){
