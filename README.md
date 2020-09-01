@@ -34,7 +34,7 @@ A detailed changelog, intended for programmers
 
 ## **Bugs**
 
-Currently no known bugs.
+Despite working well in Firefox, Capture renders window in Chrome but doesn't render image.
 
 
 ## Thanks
