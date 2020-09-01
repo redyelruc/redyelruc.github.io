@@ -7,7 +7,7 @@ let fillColor; // color that cells will be painted
 let cellBorderStyle = "1px solid rgb(230,230,230)";
 let fillStyle = 'color'; // switches between monochrome/color
 // shades from white to black
-let monochromes = ["rgb(255, 255, 255)", "rgb(153, 153, 153)", "rgb(119, 119, 119)", 
+let monochromes = ["rgb(255, 255, 255)", "rgb(220, 220, 220)", "rgb(190, 190, 190)", "rgb(153, 153, 153)", "rgb(119, 119, 119)", 
                     "rgb(85, 85, 85)", "rgb(51, 51, 51)", "rgb(17, 17, 17)", "rgb(0, 0, 0)"];
 
 
