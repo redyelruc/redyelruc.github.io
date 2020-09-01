@@ -1,9 +1,12 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-image: url("https://i.pinimg.com/originals/ed/44/d1/ed44d114115ad4d598c994bb0e7e476e.jpg");
-
 }
 
+#title>img{
+    border: 2px solid black; 
+    border-radius: 4px;
+}
 button{
     border-radius: 8px;
     margin: 10px;
@@ -74,7 +77,8 @@ button:hover{
     grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
 
-#controls-1{
+
+.controls-1{
     font-size: 18px;
     font-weight: bold;
     color: green;
@@ -93,6 +97,7 @@ button:hover{
 
 #git{
     width: 20%;
+    padding: 2px;
     position: absolute; 
     right: 0; 
     bottom: 0;
@@ -100,13 +105,7 @@ button:hover{
 
 #git-holder{ 
     position: relative; 
-    height: 24px; 
-}
-
-
-
-.grid-item:hover{
-    background-color: red;
+    height: 100%; 
 }
 
 input[type=number]{
