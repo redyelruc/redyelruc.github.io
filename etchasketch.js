@@ -1,22 +1,30 @@
+// set global variables 
 let paintable = false; //mousedown=true mouseup=false: when paintable, cells change color on mouseover.
-let eraseMode = false; // controls whether color is white or fillColor
-let defaultColor = "#009900";
+let eraseMode = false; // controls whether color of paint is white or fillColor
+let defaultColor = "#009900"; //green
 let gridSize = 40;  //number of cells in a row/column
 let fillColor; // color that cells will be painted
 let cellBorderStyle = "1px solid rgb(230,230,230)";
+let fillStyle = 'color'; // switches between monochrome/color
+// shades from white to black
+let monochromes = ["rgb(255, 255, 255)", "rgb(153, 153, 153)", "rgb(119, 119, 119)", 
+                    "rgb(85, 85, 85)", "rgb(51, 51, 51)", "rgb(17, 17, 17)", "rgb(0, 0, 0)"];
 
+
+// start the program
 window.addEventListener("load", startup());
 
 // set the color, delete the grid, add new grid
 function startup() {
-    let colorWell = document.querySelector("#color");
-    colorWell.value = defaultColor;
-    fillColor = defaultColor;
-    colorWell.addEventListener("change", () => {
-        fillColor = event.target.value
-    }, false);
-    colorWell.select();
+    initialiseColorWell();
+    initialiseGridSizeControl();
+    initialiseColorToggle();
+    deleteGrid();
+    makeGrid(gridSize);
+}
 
+// set up the grid size controller
+function initialiseGridSizeControl(){
     let gridSizeControl = document.querySelector("#gridsize");
     gridSizeControl.value = gridSize;
     gridSizeControl.addEventListener("change", () => {
@@ -25,9 +33,21 @@ function startup() {
         makeGrid(gridSize);
         toggleGridlines(document.querySelector("#gridline-visibility"));
     }, false);
+}
 
-    deleteGrid();
-    makeGrid(gridSize);
+function initialiseColorToggle(){
+    let colorToggle = document.querySelector("#color-tog");
+    colorToggle.checked = "checked";
+}
+// set up the colorWell and set to default color
+function initialiseColorWell(){
+    let colorWell = document.querySelector("#color");
+    colorWell.value = defaultColor;
+    fillColor = defaultColor;
+    colorWell.addEventListener("change", () => {
+        fillColor = event.target.value
+    }, false);
+    colorWell.select();
 }
 
 // make a new grid
@@ -38,14 +58,21 @@ function makeGrid(size) {
     for (c = 0; c < (size * size); c++) {
         let cell = document.createElement("div");
         cell.style.border = cellBorderStyle;
-        cell.style["background-color"] = "white";
-        cell.addEventListener("click", () => { paintCell(cell) });
+        cell.style["background-color"] = "rgb(255, 255, 255)";
+        //add events for mouse movements
         cell.addEventListener("mousedown", () => { paintable = true });
         cell.addEventListener("mouseup", () => { paintable = false });
-        cell.addEventListener("mouseover", () => { if (paintable) { paintCell(cell) } });
-        cell.addEventListener("mousedown", function(event){
-            event.preventDefault()
-          });
+        cell.addEventListener("mouseover", () => { 
+            if (paintable) { 
+                if (fillStyle === "color"){paintCell(cell);}
+                else{paintCellMonochrome(cell);} 
+            } });
+        cell.addEventListener("click", () => { 
+            if (fillStyle === "color"){paintCell(cell);}
+            else{paintCellMonochrome(cell);}
+        });
+        // prevent cell from being dragged like on normal mousedown
+        cell.addEventListener("mousedown", function(event){event.preventDefault()});
         sketchpad.appendChild(cell).className = "grid-item";
     };
 }
@@ -58,6 +85,28 @@ function deleteGrid() {
     }
 }
 
+// color a cell
+function paintCell(cell) {
+    if (eraseMode) {
+        cell.style['background-color'] = "rgb(255, 255, 255)";
+    } else {
+        cell.style['background-color'] = fillColor;
+    }
+}
+
+// color a cell a darker shade
+function paintCellMonochrome(cell) {
+    if (eraseMode) {
+        cell.style['background-color'] = "rgb(255, 255, 255)";
+    } else {
+        let currentShade = cell.style['background-color'];
+        let newShade = currentShade;
+        if (monochromes.indexOf(currentShade) < monochromes.length){
+            newShade = monochromes[monochromes.indexOf(currentShade) + 1];
+        }
+        cell.style['background-color'] = newShade;
+    }
+}
 
 // make gridlines visible/invisible
 function toggleGridlines(element) {
@@ -68,15 +117,6 @@ function toggleGridlines(element) {
         } else {
             cells[i].style.border = "none";
         }
-    }
-}
-
-// color a cell
-function paintCell(cell) {
-    if (eraseMode) {
-        cell.style['background-color'] = "white";
-    } else {
-        cell.style['background-color'] = fillColor;
     }
 }
 
@@ -94,7 +134,6 @@ function enforceMinMax(element) {
     }
 }
 
-
 // turn erase mode on or off
 function toggleEraseMode() {
     let button = document.getElementById("erase-toggle");
@@ -111,10 +150,19 @@ function toggleEraseMode() {
     }
 }
 
+// toggle monochrome/color
+function toggleMonochrome(){
+    if (fillStyle === "color"){
+        fillStyle = "mono";
+    } else if (fillStyle === "mono"){
+        fillStyle = "color";
+    }
+}
+
+// take a screenshot of the sketchpad and open in new window
 function captureSketchpad() {
     sketchpad = document.getElementById("sketchpad");
-    html2canvas(sketchpad, { onrendered:function(canvas) 
-        {
+    html2canvas(sketchpad, { onrendered:function(canvas){
         let imageURL = canvas.toDataURL('sketch/png');
         window.open(imageURL);
         }
