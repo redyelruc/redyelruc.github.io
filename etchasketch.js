@@ -1,13 +1,13 @@
 // set global variables 
 let paintable = false; //mousedown=true mouseup=false: when paintable, cells change color on mouseover.
 let eraseMode = false; // controls whether color of paint is white or fillColor
-let defaultColor = "#009900"; //green
+let defaultColor = "#8e00ff"; //purple
 let gridSize = 40;  //number of cells in a row/column
 let fillColor; // color that cells will be painted
 let cellBorderStyle = "1px solid rgb(230,230,230)";
 let fillStyle = 'color'; // switches between monochrome/color
 // shades from white to black
-let monochromes = ["rgb(255, 255, 255)", "rgb(220, 220, 220)", "rgb(190, 190, 190)", "rgb(153, 153, 153)", "rgb(119, 119, 119)", 
+let monochromePalette = ["rgb(255, 255, 255)", "rgb(220, 220, 220)", "rgb(190, 190, 190)", "rgb(153, 153, 153)", "rgb(119, 119, 119)", 
                     "rgb(85, 85, 85)", "rgb(51, 51, 51)", "rgb(17, 17, 17)", "rgb(0, 0, 0)"];
 
 
@@ -38,7 +38,7 @@ function initialiseGridSizeControl(){
 function initialiseColorToggle(){
     let colorToggle = document.querySelector("#color-tog");
     colorToggle.checked = "checked";
-    fillStyle = 'color';
+    fillStyle = "color";
 }
 // set up the colorWell and set to default color
 function initialiseColorWell(){
@@ -102,8 +102,8 @@ function paintCellMonochrome(cell) {
     } else {
         let currentShade = cell.style['background-color'];
         let newShade = currentShade;
-        if (monochromes.indexOf(currentShade) < monochromes.length){
-            newShade = monochromes[monochromes.indexOf(currentShade) + 1];
+        if (monochromePalette.indexOf(currentShade) < monochromePalette.length){
+            newShade = monochromePalette[monochromePalette.indexOf(currentShade) + 1];
         }
         cell.style['background-color'] = newShade;
     }
