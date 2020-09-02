@@ -35,11 +35,13 @@ function initialiseGridSizeControl(){
     }, false);
 }
 
+// set up the toggle between color and monochrome
 function initialiseColorToggle(){
     let colorToggle = document.querySelector("#color-tog");
     colorToggle.checked = "checked";
     fillStyle = "color";
 }
+
 // set up the colorWell and set to default color
 function initialiseColorWell(){
     let colorWell = document.querySelector("#color");
@@ -95,7 +97,7 @@ function paintCell(cell) {
     }
 }
 
-// color a cell a darker shade
+// color a cell a darker shade of grey
 function paintCellMonochrome(cell) {
     if (eraseMode) {
         cell.style['background-color'] = "rgb(255, 255, 255)";
@@ -121,20 +123,6 @@ function toggleGridlines(element) {
     }
 }
 
-// ensure number entered does not exceed min and max allowed
-// if it does, change to either min or max
-function enforceMinMax(element) {
-    if (element.value != "") {
-        if (parseInt(element.value) < parseInt(element.min)) {
-            element.value = element.min;
-        }
-        if (parseInt(element.value) > parseInt(element.max)) {
-            element.value = element.max;
-            element.click();
-        }
-    }
-}
-
 // turn erase mode on or off
 function toggleEraseMode() {
     let button = document.getElementById("erase-toggle");
@@ -148,6 +136,8 @@ function toggleEraseMode() {
         button.style["font-weight"] = "normal";
         button.style["background-color"] = "white";
         button.style.border = "1px solid black";
+        button.addEventListener("mouseover", () => {button.style['font-weight'] = "bold";});
+        button.addEventListener("mouseout", () => {button.style['font-weight'] = "normal";});
     }
 }
 
@@ -168,4 +158,18 @@ function captureSketchpad() {
         window.open(imageURL);
         }
     });
+}
+
+// ensure number entered does not exceed min and max allowed
+// if it does, change to either min or max
+function enforceMinMax(element) {
+    if (element.value != "") {
+        if (parseInt(element.value) < parseInt(element.min)) {
+            element.value = element.min;
+        }
+        if (parseInt(element.value) > parseInt(element.max)) {
+            element.value = element.max;
+            element.click();
+        }
+    }
 }
