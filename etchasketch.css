@@ -13,14 +13,12 @@ button{
     width: 100px;
     padding: 2px;
     border: 1px solid black;
-    transition-duration: 0 s;
+    background-color: white;
 }
 
 button:hover{
-    border: 2px solid black;
     font-weight: bold;
 }
-
 
 #control-panel{
     display: flex;
@@ -49,10 +47,7 @@ button:hover{
 }
 
 #bottom-controls{
-    display:flex;
-    flex-direction: column;
-    justify-content:space-around;
-
+    display: grid;
 }
 
 #right-panel{
