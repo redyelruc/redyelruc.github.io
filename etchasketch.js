@@ -159,6 +159,7 @@ function captureSketchpad() {
         win.document.write("<head><title>Sketch.png</title></head>");
         win.document.write(`<a download="sketch.png" href='${canvas.toDataURL("sketch/png")}'>`);
         win.document.write("<img src= '"+ canvas.toDataURL("sketch/png") + "'/></a>");
+        win.document.write("<p>Click image to download</p>");
         }
     });
 }
