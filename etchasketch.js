@@ -155,7 +155,8 @@ function captureSketchpad() {
     sketchpad = document.getElementById("sketchpad");
     html2canvas(sketchpad, { onrendered:function(canvas){
         let imageURL = canvas.toDataURL('sketch/png');
-        window.open(imageURL, "_blank");
+        let win = window.open();
+        win.document.write("<img src= '"+ canvas.toDataURL("sketch/png") + "'/>");
         }
     });
 }
