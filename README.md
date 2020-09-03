@@ -30,11 +30,13 @@ $ git commit -m "A brief summary of the commit
 
 ## **Changelog**
 
-A detailed changelog, intended for programmers
+03/09/2020
+FIXED: Capture renders window in Chrome but doesn't render image.
+Code in captureSketchpad() function updated to ensure when new window opens, a single click downloads the image. Works well in Firefox, Chrome, and IE.
 
 ## **Bugs**
 
-Despite working well in Firefox, Capture renders window in Chrome but doesn't render image.
+None known.
 
 
 ## Thanks
