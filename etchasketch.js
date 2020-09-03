@@ -157,7 +157,8 @@ function captureSketchpad() {
         let imageURL = canvas.toDataURL('sketch/png');
         let win = window.open(imageURL,"_blank");
         win.document.write("<head><title>Sketch.png</title></head>");
-        win.document.write("<img src= '"+ canvas.toDataURL("sketch/png") + "'/>");
+        win.document.write(`<a download="sketch.png" href='${canvas.toDataURL("sketch/png")}'>`);
+        win.document.write("<img src= '"+ canvas.toDataURL("sketch/png") + "'/></a>");
         }
     });
 }
