@@ -12,10 +12,10 @@ let monochromePalette = ["rgb(255, 255, 255)", "rgb(220, 220, 220)", "rgb(190, 1
 
 
 // start the program
-window.addEventListener("load", startup());
+window.addEventListener("load", startApplication());
 
 // set the color, delete the grid, add new grid
-function startup() {
+function startApplication() {
     initialiseColorWell();
     initialiseGridSizeControl();
     initialiseColorToggle();
